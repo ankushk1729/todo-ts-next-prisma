@@ -1,8 +1,22 @@
-import '../styles/globals.css'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
+import '../styles/globals.css'
+
+const queryClient = new QueryClient({
+  defaultOptions:{
+    queries: {
+      staleTime: 5*1000
+    }
+  }
+})
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Component {...pageProps} />
+    </QueryClientProvider>
+  )
+
 }
 
 export default MyApp

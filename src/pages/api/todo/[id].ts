@@ -3,7 +3,6 @@ import { prisma } from '../../../server/db/prisma';
 
 export default async function handler(req: NextApiRequest, res:NextApiResponse) {
     const { id } = req.query
-    console.log(id)
 
     if(!id || typeof(id) != 'string'){
         res.status(400).json({msg: 'Please provide a valid id'})
@@ -21,18 +20,26 @@ export default async function handler(req: NextApiRequest, res:NextApiResponse) 
             return
         } 
 
-        res.status(200).json({todo})
+        res.status(200).json({...todo})
         return
     }
 
     if(req.method === 'PATCH'){
-        const { text } = req.body
+        const { text,checked } = JSON.parse(req.body)
+        const todo = await prisma.todo.findFirst({
+            where: { id }
+        })
+        if(!todo) {
+            res.status(404).json({msg: `No todo with id ${id}`})
+            return
+        }
         const updated_todo = await prisma.todo.update({
             where:{
                 id
             },
             data: {
-                text
+                text: text != null ? text : undefined,
+                checked: (checked != null) ? (todo.checked ? false : true) : undefined,
             }
         })
         res.status(200).json({todo: updated_todo})

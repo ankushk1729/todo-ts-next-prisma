@@ -8,13 +8,18 @@ export default async function handler(
 ) {
 
   if(req.method === 'GET'){
-    const todos = await prisma.todo.findMany({})
-    res.status(200).json({ todos })  
+    const todos = await prisma.todo.findMany({
+      where: {},
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
+    res.status(200).json(todos)  
     return
   }
 
   if(req.method === 'POST'){
-    const { text } = req.body
+    const { text } = JSON.parse(req.body)
     const new_todo = await prisma.todo.create({
       data:{
         text
