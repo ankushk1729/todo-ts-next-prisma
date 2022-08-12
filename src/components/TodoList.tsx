@@ -72,7 +72,7 @@ const TodoList: FC<{
               <input onChange={() => markUnmarkTodoHandler(todo.id)} checked = {todo.checked} id="checkbox" type="checkbox" value="" className = "w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300  dark:bg-gray-700 dark:border-gray-600" />
             </div>
             <p className={`flex-1 ml-2 ${todo.checked ? 'line-through': ''}`}>{todo.text}</p>
-            <Button size= 's' fontColor='white' bgColor='red' text='Delete' onClick = {() => deleteTodoHandler(todo.id)}/>
+            <Button size= 's' bgColor='red' text='Delete' onClick = {() => deleteTodoHandler(todo.id)}/>
           </div>
         ))
       }

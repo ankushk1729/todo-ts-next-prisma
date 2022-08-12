@@ -10,7 +10,6 @@ interface AddTodoProps {
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string
   bgColor: string
-  fontColor?: string
   size: 's' | 'm' | 'l'
 }
 
@@ -23,19 +22,19 @@ const addTodo = async (props: AddTodoProps) => {
   return await res.json();
 }
 
-export const Button: FC<ButtonProps> = ({size, text, bgColor, fontColor = 'white', ...rest}) => {
+export const Button: FC<ButtonProps> = ({size, text, bgColor, ...rest}) => {
   if(size === 's'){
     return (
-      <button {...rest} className={`rounded-md py-1 px-2 bg-${bgColor}-400 text-sm text-${fontColor}`}>{text}</button>
+      <button {...rest} className={`rounded-md py-1 px-2 bg-${bgColor}-400 text-sm text-white`}>{text}</button>
     )  
   }
   if(size === 'm'){
     return (
-      <button {...rest} className={`rounded-md py-2 px-3 bg-${bgColor}-400 text-md text-${fontColor}`}>{text}</button>
+      <button {...rest} className={`rounded-md py-2 px-3 bg-${bgColor}-400 text-md text-white`}>{text}</button>
     )  
   }
   return (
-    <button {...rest} className={`rounded-md py-2 px-4 bg-${bgColor}-400 text-${fontColor}`}>{text}</button>
+    <button {...rest} className={`rounded-md py-2 px-4 bg-${bgColor}-400 text-white`}>{text}</button>
   )
 }
 
@@ -78,7 +77,7 @@ const Home: NextPage = () => {
       <div className=''>
         <form className='flex justify-between gap-2 mb-4' onSubmit={(e) => addTodoEventHandler(e, todoTextRef.current!.value)}>
           <input placeholder='Enter the todo' className='w-full border flex-1 px-3' ref = {todoTextRef} type='text' />
-          <Button bgColor = 'blue' fontColor='white' size = 'l' text = 'Add Todo'/>
+          <Button bgColor = 'blue' size = 'l' text = 'Add Todo'/>
         </form>
         <TodoList containerRef={containerRef}/>
       </div>
