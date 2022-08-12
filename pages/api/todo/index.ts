@@ -17,7 +17,7 @@ export default async function handler(
     const { text } = req.body
     const new_todo = await prisma.todo.create({
       data:{
-        text 
+        text
       }
     })
     res.status(201).json({todo:new_todo})
