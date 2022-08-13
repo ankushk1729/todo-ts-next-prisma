@@ -4,19 +4,19 @@ import { Button } from '../pages';
 
 
 const fetchTodos = async (): Promise<Todo[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todo`)
+  const res = await fetch(`/api/todo`)
   return await res.json();
 }
 
 
 const deleteTodo = async (id: string) => {
-  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todo/${id}`, {
+  await fetch(`/api/todo/${id}`, {
       method:'DELETE'
   })
 }
 
 const markUnmarkTodo = async (id: string) => {
-  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todo/${id}`, {
+  await fetch(`/api/todo/${id}`, {
     method:'PATCH',
     body: JSON.stringify({checked: true})
   })
