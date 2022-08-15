@@ -15,7 +15,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 
 const addTodo = async (props: AddTodoProps) => {
-  const res = await fetch(`/api/todo/`, {
+  const res = await fetch(`/api/todos/`, {
       method:'POST',
       body: JSON.stringify({...props})
   })
